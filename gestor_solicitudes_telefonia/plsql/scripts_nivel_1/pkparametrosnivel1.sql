@@ -15,9 +15,9 @@ CREATE OR REPLACE PACKAGE pkParametrosNivel1 AS
         ivnum_max_solicitudes    parametros.num_max_solicitudes%TYPE
     );
 
-    FUNCTION fconsultar_tiempo_max_pendiente RETURN parametros.tiempo_max_pendiente%TYPE;
+    FUNCTION fconsultartiempomaxpendiente RETURN parametros.tiempo_max_pendiente%TYPE;
 
-    FUNCTION fconsultar_num_max_solicitudes RETURN parametros.num_max_solicitudes%TYPE;
+    FUNCTION fconsultarnummaxsolicitudes RETURN parametros.num_max_solicitudes%TYPE;
 
 END pkParametrosNivel1;
 /
