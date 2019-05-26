@@ -71,6 +71,8 @@ CREATE OR REPLACE PACKAGE pkSolicitudNivel1 AS
         ivtipo_solicitud_codigo solicitud.tipo_solicitud_codigo%TYPE
     ) RETURN solicitud.numero_solicitud%TYPE;
 
+    FUNCTION fNextNumeroSolicitud RETURN NUMBER;
+
 END pkSolicitudNivel1;
 /
 
@@ -297,5 +299,30 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
                                             || sqlerrm
                                             || sqlcode);
     END fconsultarsolicitudesvencidas;
+
+    FUNCTION fnumerosolicitudesfuncionario (
+        ivfuncionario_cedula solicitud.funcionario_cedula%TYPE
+    ) RETURN NUMBER IS
+        ovcantidadsolicitudes NUMBER;
+    BEGIN
+        SELECT
+            COUNT(*)
+        INTO ovcantidadsolicitudes
+        FROM
+            solicitud s
+        WHERE
+            s.funcionario_cedula = ivfuncionario_cedula;
+
+    END fnumerosolicitudesfuncionario;
+
+    FUNCTION fNextNumeroSolicitud RETURN NUMBER IS
+        ovNextNumeroSolicitud NUMBER;
+    BEGIN
+        SELECT
+            secuence_numero_solicitud.NEXTVAL
+        INTO ovNextNumeroSolicitud
+        FROM
+            DUAL;
+    END fnumerosolicitudesfuncionario;
 
 END pkSolicitudNivel1;
