@@ -1,5 +1,11 @@
 CREATE OR REPLACE PACKAGE pkSolicitudNivel1 AS
 --[declaración de objetos públicos]
+
+	ESTADO_PENDIENTE CONSTANT SOLICITUD.ESTADO%TYPE :='PENIENTE';
+	ESTADO_ASIGNADA CONSTANT SOLICITUD.ESTADO%TYPE :='ASIGNADA';
+	ESTADO_ATENDIDA CONSTANT SOLICITUD.ESTADO%TYPE :='ATENDIDA';
+	ESTADO_ANULADA CONSTANT SOLICITUD.ESTADO%TYPE :='ANULADA';
+	
     PROCEDURE pinsertarsolicitud (
         ivnumero_solicitud         solicitud.numero_solicitud%TYPE,
         ivobservacion              solicitud.observacion%TYPE,

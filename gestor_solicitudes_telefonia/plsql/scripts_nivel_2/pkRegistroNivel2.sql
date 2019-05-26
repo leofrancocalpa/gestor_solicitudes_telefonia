@@ -89,14 +89,27 @@ CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
                 RAISE_APPLICATION_ERROR(-1,'No se puede registrar el funcionario');
      END pRegistrarFuncionario;  
      
-  --  PROCEDURE pRegistrarSolicitud(
-  --      ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
-  --      ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
-  --      ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
-  --      ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
-  --      ivIdProducto IN PRODUCTO.ID%TYPE,
-  --      ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
-  --      ivIdAnomalia IN ANOMALIA.ID%TYPE
-  --  ) IS
+  POCEDURE pRegistrarSolicitud(
+        ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
+        ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
+        ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
+        ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
+        ivIdProducto IN PRODUCTO.ID%TYPE,
+        ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
+        ivIdAnomalia IN ANOMALIA.ID%TYPE
+    ) IS
+    	vIdAnomalia ANOMALIA.ID%TYPE;
+    	vFechaAsignacion SOLICITUD.FECHA_ASIGNACION%TYPE;
+    	vFechaAtencion SOLICITUD.FECHA_ATENCIOM%TYPE;
+    	vEstado SOLICITUD.ESTADO%TYPE;
+    	vCedulaFuncionario FUNCIONARIO.CEDULA%TYPE;
+        vComentarioFuncionario SOLICITUD.COMENTARIO_FUNCIONARIO;
+        vNumeroSolicitud SOLICITUD.NUMERO_SOLICITUD;
+        vCausaCancelacion SOLICITUD.CAUSA_CANCELACION;
+	
+    BEGIN
+	    vNumeroSolicitud := ;
+	    
+    
         
 END pkResgistroNivel2;
