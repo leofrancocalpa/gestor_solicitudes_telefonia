@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 18.4.0.339.1536
---   en:        2019-05-23 15:38:54 COT
+--   en:        2019-05-26 01:45:04 COT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -13,6 +13,8 @@ DROP TABLE contrato CASCADE CONSTRAINTS;
 
 DROP TABLE funcionario CASCADE CONSTRAINTS;
 
+DROP TABLE parametros CASCADE CONSTRAINTS;
+
 DROP TABLE producto CASCADE CONSTRAINTS;
 
 DROP TABLE solicitud CASCADE CONSTRAINTS;
@@ -24,7 +26,8 @@ DROP TABLE tipo_solicitud CASCADE CONSTRAINTS;
 CREATE TABLE anomalia (
     id       NVARCHAR2(10) NOT NULL,
     nombre   NVARCHAR2(30) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE anomalia ADD CONSTRAINT anomalia_pk PRIMARY KEY ( id );
 
@@ -34,16 +37,18 @@ CREATE TABLE cliente (
     fecha_nacimiento   DATE NOT NULL,
     direccion          NVARCHAR2(20) NOT NULL,
     telefono           NVARCHAR2(15) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE cliente ADD CONSTRAINT cliente_pk PRIMARY KEY ( cedula );
 
 CREATE TABLE contrato (
     fecha_inicio     DATE NOT NULL,
-    fecha_fin        DATE NOT NULL,
+    fecha_fin        DATE,
     cliente_cedula   NUMBER(11) NOT NULL,
     producto_id      NVARCHAR2(10) NOT NULL
-);
+)
+LOGGING;
 
 CREATE TABLE funcionario (
     cedula             NUMBER(11) NOT NULL,
@@ -51,15 +56,26 @@ CREATE TABLE funcionario (
     fecha_nacimiento   DATE NOT NULL,
     direccion          NVARCHAR2(20) NOT NULL,
     telefono           NVARCHAR2(15) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE funcionario ADD CONSTRAINT funcionario_pk PRIMARY KEY ( cedula );
+
+CREATE TABLE parametros (
+    id                     NUMBER(2) NOT NULL,
+    tiempo_max_pendiente   NUMBER(3),
+    num_max_solicitudes    NUMBER(2)
+)
+LOGGING;
+
+ALTER TABLE parametros ADD CONSTRAINT parametros_pk PRIMARY KEY ( id );
 
 CREATE TABLE producto (
     id                     NVARCHAR2(10) NOT NULL,
     nombre                 NVARCHAR2(15) NOT NULL,
     tipo_producto_codigo   NVARCHAR2(15) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE producto ADD CONSTRAINT producto_pk PRIMARY KEY ( id );
 
@@ -76,7 +92,8 @@ CREATE TABLE solicitud (
     tipo_solicitud_codigo    NVARCHAR2(15) NOT NULL,
     funcionario_cedula       NUMBER(11) NOT NULL,
     producto_id              NVARCHAR2(10) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE solicitud ADD CONSTRAINT solicitud_pk PRIMARY KEY ( numero_solicitud );
 
@@ -84,7 +101,8 @@ CREATE TABLE tipo_producto (
     codigo        NVARCHAR2(15) NOT NULL,
     nombre        NVARCHAR2(20) NOT NULL,
     descripcion   NVARCHAR2(200) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE tipo_producto ADD CONSTRAINT tipo_producto_pk PRIMARY KEY ( codigo );
 
@@ -92,49 +110,58 @@ CREATE TABLE tipo_solicitud (
     codigo        NVARCHAR2(15) NOT NULL,
     nombre        NVARCHAR2(20) NOT NULL,
     descripcion   NVARCHAR2(200) NOT NULL
-);
+)
+LOGGING;
 
 ALTER TABLE tipo_solicitud ADD CONSTRAINT tipo_solicitud_pk PRIMARY KEY ( codigo );
 
 ALTER TABLE contrato
     ADD CONSTRAINT contrato_cliente_fk FOREIGN KEY ( cliente_cedula )
-        REFERENCES cliente ( cedula );
+        REFERENCES cliente ( cedula )
+    NOT DEFERRABLE;
 
 ALTER TABLE contrato
     ADD CONSTRAINT contrato_producto_fk FOREIGN KEY ( producto_id )
-        REFERENCES producto ( id );
+        REFERENCES producto ( id )
+    NOT DEFERRABLE;
 
 ALTER TABLE producto
     ADD CONSTRAINT producto_tipo_producto_fk FOREIGN KEY ( tipo_producto_codigo )
-        REFERENCES tipo_producto ( codigo );
+        REFERENCES tipo_producto ( codigo )
+    NOT DEFERRABLE;
 
 ALTER TABLE solicitud
     ADD CONSTRAINT solicitud_anomalia_fk FOREIGN KEY ( anomalia_id )
-        REFERENCES anomalia ( id );
+        REFERENCES anomalia ( id )
+    NOT DEFERRABLE;
 
 ALTER TABLE solicitud
     ADD CONSTRAINT solicitud_cliente_fk FOREIGN KEY ( cliente_cedula )
-        REFERENCES cliente ( cedula );
+        REFERENCES cliente ( cedula )
+    NOT DEFERRABLE;
 
 ALTER TABLE solicitud
     ADD CONSTRAINT solicitud_funcionario_fk FOREIGN KEY ( funcionario_cedula )
-        REFERENCES funcionario ( cedula );
+        REFERENCES funcionario ( cedula )
+    NOT DEFERRABLE;
 
 ALTER TABLE solicitud
     ADD CONSTRAINT solicitud_producto_fk FOREIGN KEY ( producto_id )
-        REFERENCES producto ( id );
+        REFERENCES producto ( id )
+    NOT DEFERRABLE;
 
 ALTER TABLE solicitud
     ADD CONSTRAINT solicitud_tipo_solicitud_fk FOREIGN KEY ( tipo_solicitud_codigo )
-        REFERENCES tipo_solicitud ( codigo );
+        REFERENCES tipo_solicitud ( codigo )
+    NOT DEFERRABLE;
 
 
 
 -- Informe de Resumen de Oracle SQL Developer Data Modeler: 
 -- 
--- CREATE TABLE                             8
+-- CREATE TABLE                             9
 -- CREATE INDEX                             0
--- ALTER TABLE                             15
+-- ALTER TABLE                             16
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0

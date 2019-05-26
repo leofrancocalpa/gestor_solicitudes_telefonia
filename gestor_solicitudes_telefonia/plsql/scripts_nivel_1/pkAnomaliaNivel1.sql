@@ -1,35 +1,35 @@
-CREATE OR REPLACE PACKAGE pk_anomalia_1 AS
+CREATE OR REPLACE PACKAGE pkAnomaliaNivel1 AS
     PROCEDURE pinsertar (
-        nombre   anomalia.nombre%TYPE,
-        id       anomalia.id%TYPE
+        ivnombre   anomalia.nombre%TYPE,
+        ivid       anomalia.id%TYPE
     );
 
     PROCEDURE pmodificar (
-        nombre   anomalia.nombre%TYPE,
-        id       anomalia.id%TYPE
+        ivnombre   anomalia.nombre%TYPE,
+        ivid       anomalia.id%TYPE
     );
 
     PROCEDURE peliminar (
-        id anomalia.id%TYPE
+        ivid anomalia.id%TYPE
     );
 
     FUNCTION fconsultar (
-        id anomalia.id%TYPE
+        ivid anomalia.id%TYPE
     ) RETURN anomalia%rowtype;
 
-END pk_anomalia_1;
+END pkAnomaliaNivel1;
 /
 
-CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
+CREATE OR REPLACE PACKAGE BODY pkAnomaliaNivel1 AS
 
     PROCEDURE pinsertar (
-        nombre   anomalia.nombre%TYPE,
-        id       anomalia.id%TYPE
+        ivnombre   anomalia.nombre%TYPE,
+        ivid       anomalia.id%TYPE
     ) IS
     BEGIN
         INSERT INTO anomalia VALUES (
-            id,
-            nombre
+            ivid,
+            ivnombre
         );
 
     EXCEPTION
@@ -42,15 +42,15 @@ CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
     END pinsertar;
 
     PROCEDURE pmodificar (
-        nombre   anomalia.nombre%TYPE,
-        id       anomalia.id%TYPE
+        ivnombre   anomalia.nombre%TYPE,
+        ivid       anomalia.id%TYPE
     ) IS
     BEGIN
         UPDATE anomalia a
         SET
-            a.nombre = nombre
+            a.nombre = ivnombre
         WHERE
-            a.id = id;
+            a.id = ivid;
 
     EXCEPTION
         WHEN no_data_found THEN
@@ -62,12 +62,12 @@ CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
     END pmodificar;
 
     PROCEDURE peliminar (
-        id anomalia.id%TYPE
+        ivid anomalia.id%TYPE
     ) IS
     BEGIN
         DELETE FROM anomalia
         WHERE
-            anomalia.id = id;
+            anomalia.id = ivid;
 
     EXCEPTION
         WHEN no_data_found THEN
@@ -79,7 +79,7 @@ CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
     END peliminar;
 
     FUNCTION fconsultar (
-        id anomalia.id%TYPE
+        ivid anomalia.id%TYPE
     ) RETURN anomalia%rowtype IS
         rowanomalia anomalia%rowtype;
     BEGIN
@@ -89,7 +89,7 @@ CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
         FROM
             anomalia
         WHERE
-            anomalia.id = id;
+            anomalia.id = ivid;
 
     EXCEPTION
         WHEN no_data_found THEN
@@ -100,4 +100,4 @@ CREATE OR REPLACE PACKAGE BODY pk_anomalia_1 AS
                                             || sqlcode);
     END fconsultar;
 
-END pk_anomalia_1;
+END pkAnomaliaNivel1;
