@@ -1,5 +1,36 @@
+/**
+Declaracion del paquete para registrar y sus objetos publicos
+*/
 CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
-    
+    /**
+        Procedimiento que permite registrar un cliente no existente en la bd
+        
+        @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
+            cedula documento de identificacion del Cliente
+        @param ivNombreCliente IN CLIENTE.NOMBRE%TYPE
+            Nombre comleto del cliente
+        @param ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE
+            Fecha de nacimiento del cliente
+        @param ivDireccionCliente IN CLIENTE.DIRECCION%TYPE
+            Direcccion de ubicacion del cliente
+        @param ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
+            Numero de telefono de contacto del cliente
+        */
+        
+        /**
+            Procedimiento que permite registrar un Funcionario no existente en la bd
+            
+            @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
+                cedula documento de identificacion del funcionario
+            @param ivNombreCliente IN CLIENTE.NOMBRE%TYPE
+                Nombre comleto del funcionario
+            @param ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE
+                Direcccion de ubicacion del funcionario
+            @param ivDireccionCliente IN CLIENTE.DIRECCION%TYPE
+                Direcccion de ubicacion del funcionario
+            @param ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
+                Numero de telefono de contacto del funcionario
+            */
      PROCEDURE pRegistrarCliente(
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivNombreCliente IN CLIENTE.NOMBRE%TYPE,
