@@ -15,24 +15,25 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
         ivDireccionFuncionario IN FUNCIONARIO.DIRECCION%TYPE,
         ivTelefonoFuncionario IN FUNCIONARIO.TELEFONo%TYPE
     );
-    PROCEDURE pRegistrarTipoProducto(
+   
+   PROCEDURE pRegistrarTipoProducto(
         ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
         ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE,
         ivDescripcionTipoProducto IN TIPO_PRODUCTO.DESCRIPCION%TYPE
     );
     
-    PROCEDURE pRegistrarProdcuto(
-        ivIdProducto IN PRODUCTO.ID%TYPE,
-        ivNombreProducto IN PRODUCTO.NOMBRE%TYPE,
-        ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE
-    );
+   -- PROCEDURE pRegistrarProdcuto(
+    --    ivIdProducto IN PRODUCTO.ID%TYPE,
+    --    ivNombreProducto IN PRODUCTO.NOMBRE%TYPE,
+     --   ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE
+   -- );
     
-    PROCEDURE pRegistrarAnomalia(
-        ivIdeAnomalia IN ANOMALIA.ID%TYPE,
-        ivNombreAnomalia IN  ANOMALIA.NOMBRE%TYPE
-    );
+   -- PROCEDURE pRegistrarAnomalia(
+    --    ivIdeAnomalia IN ANOMALIA.ID%TYPE,
+    --    ivNombreAnomalia IN  ANOMALIA.NOMBRE%TYPE
+    --);
     
-    POCEDURE pRegistrarSolicitud(
+    PROCEDURE pRegistrarSolicitud(
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
@@ -43,8 +44,8 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
     );
     
 END pkRegistroNivel2;
-
-CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
+/
+CREATE OR REPLACE PACKAGE BODY pkRegistroNivel2 AS
 
     PROCEDURE pRegistrarCliente(
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
@@ -54,7 +55,7 @@ CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
         ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
     ) IS
         BEGIN
-            pkClientesNivel1.pInsertar(
+            pkClienteNivel1.pInsertar(
                 ivCedulaCliente,
                 ivNombreCliente,
                 ivFechaNacimientoCliente,
@@ -62,9 +63,9 @@ CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
                 ivTelefonoCliente
             );
         EXCEPTION
-            WHEN DUP_VAL_OB_INDEX THEN
+            WHEN DUP_VAL_ON_INDEX THEN
                 RAISE_APPLICATION_ERROR(-1,'Ya existe un cliente registrado con esta identificacion');
-            WHEN OTHER THEN
+            WHEN OTHERS THEN
                 RAISE_APPLICATION_ERROR(-1,'No se le logro registar el usuario');
             
     END pRegistrarCliente; 
@@ -89,7 +90,7 @@ CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
                 RAISE_APPLICATION_ERROR(-1,'No se puede registrar el funcionario');
      END pRegistrarFuncionario;  
      
-  POCEDURE pRegistrarSolicitud(
+  PROCEDURE pRegistrarSolicitud(
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
@@ -98,21 +99,59 @@ CREATE OR REPLACE PACKAGE BODY pkResgistroNivel2 AS
         ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
         ivIdAnomalia IN ANOMALIA.ID%TYPE
     ) IS
-    	
+    	vFechaCreacion SOLICITUD.FECHA_CREACION%TYPE;
     	vFechaAsignacion SOLICITUD.FECHA_ASIGNACION%TYPE;
-    	vFechaAtencion SOLICITUD.FECHA_ATENCIOM%TYPE;
+    	vFechaAtencion SOLICITUD.FECHA_ATENCION%TYPE;
     	vEstado SOLICITUD.ESTADO%TYPE;
-        vComentarioFuncionario SOLICITUD.COMENTARIO_FUNCIONARIO;
-        vNumeroSolicitud SOLICITUD.NUMERO_SOLICITUD;
+        vComentarioFuncionario SOLICITUD.COMENTARIO_FUNCIONARIO%TYPE;
+        vNumeroSolicitud SOLICITUD.NUMERO_SOLICITUD%TYPE;
         
 	
     BEGIN
-	    vNumeroSolicitud := ;
+	    vNumeroSolicitud := pkSolicitudNivel1.fNextNumeroSolicitud;
+	    vFechaCreacion := SYSDATE;
 	    vFechaAsignacion := NULL;
     	vFechaAtencion := NULL;
     	vEstado := pkSolicitudNivel1.ESTADO_PENDIENTE;
     	vComentarioFuncionario:=NULL;
-    	
-    	
+   		
+    	pkSolicitudNivel1.pinsertarsolicitud(
+    		vNumeroSolicitud,
+    		ivObservacion,
+    		vFechaCreacion,
+    		vFechaAsignacion,
+    		vFechaAtencion,
+    		ivCausaCancelacionSolicitud,
+    		vComentarioFuncionario,
+    		vEstado,
+    		ivCedulaCliente,
+    		ivIdAnomalia,
+    		ivCodigoTipoSolicitud,
+    		ivCedulaFuncionario,
+    		ivIdProducto
+    		);
+    	EXCEPTION 
+    		WHEN OTHERS THEN
+    			RAISE_APPLICATION_ERROR(-1,'No se logro registrar la solicitud');
+    		
+    END pRegistrarSolicitud;
+    
+    PROCEDURE pRegistrarTipoProducto(
+        ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
+        ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE,
+        ivDescripcionTipoProducto IN TIPO_PRODUCTO.DESCRIPCION%TYPE
+    ) IS
+        BEGIN
+            pkTipoProductoNivel1.pinsertar(
+                ivCodigoTipoProducto,
+                ivNombreTipoProducto,
+                ivDescripcionTipoProducto
+            );
+        EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                RAISE_APPLICATION_ERROR(-1,'Ya existe un tipo de producto con este codigo');
+            WHEN OTHERS THEN
+                RAISE_APPLICATION_ERROR(-1,'No se puede registrar el tipo de producto');
+        END pRegistrarTipoProducto;
         
-END pkResgistroNivel2;
+END pkRegistroNivel2;
