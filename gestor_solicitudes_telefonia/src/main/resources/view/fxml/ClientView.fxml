@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientViewController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="13.0" prefHeight="533.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Productos">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <TableView fx:id="table_productos" prefHeight="479.0" prefWidth="898.0">
+                           <columns>
+                              <TableColumn fx:id="colm_productos_idContrato" editable="false" minWidth="5.0" prefWidth="82.0" text="ID CONTRATO" />
+                              <TableColumn fx:id="colm_productos_idProducto" editable="false" prefWidth="102.0" text="ID PRODUCTO" />
+                              <TableColumn fx:id="colm_productos_nombre" editable="false" prefWidth="87.0" text="NOMBRE" />
+                              <TableColumn fx:id="colm_productos_tipoProducto" editable="false" prefWidth="87.0" text="TIPO PRODUCTO" />
+                              <TableColumn fx:id="colm_productos_descripcion" editable="false" prefWidth="103.0" text="DESCRIPCION" />
+                              <TableColumn fx:id="colm_productos_fechaInicio" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA INICIO" />
+                              <TableColumn fx:id="colm_productos_fechaFin" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA FIN" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+          <Tab text="Solicitudes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="501.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Contratacion Producto">
+                                 <content>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                       <content>
+                                          <TableView fx:id="table_solicitud_crear" prefHeight="479.0" prefWidth="898.0">
+                                             <columns>
+                                                <TableColumn fx:id="colm_solicitud_crear_nombre" editable="false" prefWidth="102.0" text="NUMERO SOLICITUD" />
+                                                <TableColumn fx:id="colm_solicitud_crear_estado" editable="false" prefWidth="87.0" text="ESTADO" />
+                                                <TableColumn fx:id="colm_solicitud_crear_tipoProduto" editable="false" prefWidth="103.0" text="TIPO DE PRODUCTO" />
+                                                <TableColumn fx:id="colm_solicitud_crear_observacion" editable="false" minWidth="5.0" prefWidth="82.0" text="OBSERVACION" />
+                                                <TableColumn fx:id="colm_solicitud_crear_fechaSolicitud" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA" />
+                                                <TableColumn fx:id="colm_solicitud_crear_funcionario" editable="false" minWidth="5.0" prefWidth="82.0" text="FUNCIONARIO" />
+                                                <TableColumn fx:id="colm_solicitud_crear_fechaAsignacion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ASIGNACION" />
+                                                <TableColumn fx:id="colm_solicitud_crear_fecha_atencion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ATENCION" />
+                                                <TableColumn fx:id="colm_solicitud_crear_comentarioFuncionario" editable="false" minWidth="5.0" prefWidth="82.0" text="COMENTARIO FUNCIONARIO" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                            </Tab>
+                            <Tab text="Modificacion Producto">
+                                 <content>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                       <content>
+                                          <TableView fx:id="table_solicitud_modificar" prefHeight="479.0" prefWidth="898.0">
+                                             <columns>
+                                                <TableColumn fx:id="colm_solicitud_modificar_numeroSolicitud" editable="false" prefWidth="102.0" text="NUMERO SOLICITUD" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_estado" editable="false" prefWidth="87.0" text="ESTADO" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_tipoProducto" editable="false" prefWidth="103.0" text="TIPO DE PRODUCTO" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_observaciones" editable="false" minWidth="5.0" prefWidth="82.0" text="OBSERVACION" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_fechaSolicitud" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_funcionario" editable="false" minWidth="5.0" prefWidth="82.0" text="FUNCIONARIO" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_fechaAsignacion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ASIGNACION" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_fechaAtencion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ATENCION" />
+                                                <TableColumn fx:id="colm_solicitud_modificar_comentarioFuncionario" editable="false" minWidth="5.0" prefWidth="82.0" text="COMENTARIO FUNCIONARIO" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                            </Tab>
+                              <Tab text="Cancelacion">
+                                 <content>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                       <content>
+                                          <TableView fx:id="table_solicitud_cancelar" prefHeight="479.0" prefWidth="898.0">
+                                             <columns>
+                                                <TableColumn fx:id="colm_solicitud_cancelar_numeroSolicitud" editable="false" prefWidth="102.0" text="NUMERO SOLICITUD" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_estado" editable="false" prefWidth="87.0" text="ESTADO" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_tipoProducto" editable="false" prefWidth="103.0" text="TIPO DE PRODUCTO" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_causaCancelacion" editable="false" minWidth="5.0" prefWidth="82.0" text="CAUSA CANCELACION" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_fechaSolicitud" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_funcionario" editable="false" minWidth="5.0" prefWidth="82.0" text="FUNCIONARIO" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_fechaAsignacion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ASIGNACION" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_fechaAtencion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ATENCION" />
+                                                <TableColumn fx:id="colm_solicitud_cancelar_comentarioFuncionario" editable="false" minWidth="5.0" prefWidth="82.0" text="COMENTARIO FUNCIONARIO" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Daño">
+                                 <content>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                       <content>
+                                          <TableView fx:id="table_solicitud_danio" prefHeight="479.0" prefWidth="898.0">
+                                             <columns>
+                                                <TableColumn fx:id="colm_solicitud_danio_numeroSolicitud" editable="false" prefWidth="102.0" text="NUMERO SOLICITUD" />
+                                                <TableColumn fx:id="colm_solicitud_danio_estado" editable="false" prefWidth="87.0" text="ESTADO" />
+                                                <TableColumn fx:id="colm_solicitud_danio_producto" editable="false" prefWidth="103.0" text="PRODUCTO" />
+                                                <TableColumn fx:id="colm_solicitud_danio_anomalia" editable="false" minWidth="5.0" prefWidth="82.0" text="ANOMALIA" />
+                                                <TableColumn fx:id="colm_solicitud_danio_fechaSolicitud" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA" />
+                                                <TableColumn fx:id="colm_solicitud_danio_funcionario" editable="false" minWidth="5.0" prefWidth="82.0" text="FUNCIONARIO" />
+                                                <TableColumn fx:id="colm_solicitud_danio_fechaAsignacion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ASIGNACION" />
+                                                <TableColumn fx:id="colm_solicitud_danio_fechaAtencion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ATENCION" />
+                                                <TableColumn fx:id="colm_solicitud_danio_comentarioFuncionario" editable="false" minWidth="5.0" prefWidth="82.0" text="COMENTARIO FUNCIONARIO" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Reclamo Facturacion">
+                                 <content>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                       <content>
+                                          <TableView fx:id="table_solicitud_reclamo" prefHeight="479.0" prefWidth="898.0">
+                                             <columns>
+                                                <TableColumn fx:id="colm_solicitud_reclamo_numeroSolicitud" editable="false" prefWidth="102.0" text="NUMERO SOLICITUD" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_estado" editable="false" prefWidth="87.0" text="ESTADO" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_producto" editable="false" prefWidth="103.0" text="PRODUCTO" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_observacion" editable="false" minWidth="5.0" prefWidth="82.0" text="OBSERVACION" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_fechaSolicitud" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_funcionario" editable="false" minWidth="5.0" prefWidth="82.0" text="FUNCIONARIO" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_fechaAsignacion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ASIGNACION" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_fechaAtencion" editable="false" minWidth="5.0" prefWidth="82.0" text="FECHA ATENCION" />
+                                                <TableColumn fx:id="colm_solicitud_reclamo_comentarioFuncionario" editable="false" minWidth="5.0" prefWidth="82.0" text="COMENTARIO FUNCIONARIO" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Registrar Solicitud">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="501.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Contratacion Producto">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="combox_crear_tipoProducto" layoutX="160.0" layoutY="53.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="51.0" layoutY="47.0" prefHeight="37.0" prefWidth="109.0" text="Tipo de producto *" />
+                                          <ChoiceBox fx:id="combox_crear_producto" layoutX="472.0" layoutY="53.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="374.0" layoutY="47.0" prefHeight="37.0" prefWidth="98.0" text="Producto *" />
+                                          <TextArea fx:id="text_observacion_solicitudCrear" layoutX="48.0" layoutY="145.0" prefHeight="128.0" prefWidth="609.0" promptText="Observaciones de solicitud de contratacion de un producto" />
+                                          <Label layoutX="48.0" layoutY="108.0" prefHeight="37.0" prefWidth="109.0" text="Observacion" />
+                                          <Button fx:id="btn_registrarSolicitudCrear" layoutX="48.0" layoutY="297.0" mnemonicParsing="false" onAction="#event_btn_registrarSolicitudCrear" prefHeight="30.0" prefWidth="125.0" text="Registrar Solicitud" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Modificacion Producto">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="combox_modificar_tipoProducto" layoutX="160.0" layoutY="177.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="51.0" layoutY="171.0" prefHeight="37.0" prefWidth="109.0" text="Tipo de producto *" />
+                                          <ChoiceBox fx:id="combox_modificar_producto" layoutX="149.0" layoutY="78.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="51.0" layoutY="72.0" prefHeight="37.0" prefWidth="98.0" text="Producto *" />
+                                          <Button fx:id="btn_registrarSolicitudModificar" layoutX="51.0" layoutY="221.0" mnemonicParsing="false" onAction="#event_btn_registrarSolicitudModificar" prefHeight="30.0" prefWidth="125.0" text="Registrar Solicitud" />
+                                          <Label layoutX="51.0" layoutY="126.0" prefHeight="37.0" prefWidth="163.0" text="Cambiar a tipo de Producto" />
+                                          <Separator layoutX="49.0" layoutY="123.0" prefHeight="5.0" prefWidth="293.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Cancelacion">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="combox_cancelar_producto" layoutX="146.0" layoutY="62.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="48.0" layoutY="56.0" prefHeight="37.0" prefWidth="98.0" text="Producto *" />
+                                          <TextArea fx:id="text_observacion_solicitudCancelar" layoutX="48.0" layoutY="145.0" prefHeight="128.0" prefWidth="609.0" promptText="Observaciones de solicitud de cancelacion de un producto" />
+                                          <Label layoutX="48.0" layoutY="108.0" prefHeight="37.0" prefWidth="135.0" text="Causa de Cancelacion *" />
+                                          <Button fx:id="btn_registrarSolicitudCancelar" layoutX="48.0" layoutY="297.0" mnemonicParsing="false" onAction="#event_btn_registrarSolicitudCancelar" prefHeight="30.0" prefWidth="125.0" text="Registrar Solicitud" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Daño">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="combox_danio_producto" layoutX="146.0" layoutY="60.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="48.0" layoutY="54.0" prefHeight="37.0" prefWidth="98.0" text="Producto *" />
+                                          <TextArea fx:id="text_observacion_solicitudDanio" layoutX="48.0" layoutY="145.0" prefHeight="128.0" prefWidth="609.0" promptText="Descripcion de anomalia  de un producto" />
+                                          <Label layoutX="48.0" layoutY="108.0" prefHeight="37.0" prefWidth="109.0" text="Descripcion" />
+                                          <Button fx:id="btn_registrarSolicitudDanio" layoutX="48.0" layoutY="297.0" mnemonicParsing="false" onAction="#event_btn_registrarSolicitudDanio" prefHeight="30.0" prefWidth="125.0" text="Registrar Solicitud" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Reclamo Facturacion">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="combox_reclamo_producto" layoutX="146.0" layoutY="60.0" prefHeight="25.0" prefWidth="182.0" />
+                                          <Label layoutX="48.0" layoutY="54.0" prefHeight="37.0" prefWidth="98.0" text="Producto *" />
+                                          <TextArea fx:id="text_observacion_solicitudReclamo" layoutX="48.0" layoutY="145.0" prefHeight="128.0" prefWidth="609.0" promptText="Descripcion de reclamo por mala facturacion" />
+                                          <Label layoutX="48.0" layoutY="108.0" prefHeight="37.0" prefWidth="109.0" text="Descripcion" />
+                                          <Button fx:id="btn_registrarSolicitudReclamo" layoutX="48.0" layoutY="297.0" mnemonicParsing="false" onAction="#event_btn_registrarSolicitudReclamo" prefHeight="30.0" prefWidth="125.0" text="Registrar Solicitud" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
