@@ -1,5 +1,19 @@
 CREATE OR REPLACE PACKAGE pkRegistroNivel3 AS
 
+/**
+    Funcion para insertar un cliente a la deb retorna un mensaje de confirmacion
+    @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
+            cedula documento de identificacion del Cliente
+        @param ivNombreCliente IN CLIENTE.NOMBRE%TYPE
+            Nombre comleto del cliente
+        @param ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE
+            Fecha de nacimiento del cliente
+        @param ivDireccionCliente IN CLIENTE.DIRECCION%TYPE
+            Direcccion de ubicacion del cliente
+        @param ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
+            Numero de telefono de contacto del cliente
+    @return Mensaje d e confirmacion si se confirma
+    */
 	FUNCTION fRegistrarCliente(
 		ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivNombreCliente IN CLIENTE.NOMBRE%TYPE,
@@ -9,6 +23,22 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel3 AS
 	) 
 	RETURN VARCHAR2;
 	
+    
+    /**
+    
+    Funcion para insertar un funcionario y retorna un mensaje de confirmacion
+       @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
+                cedula documento de identificacion del funcionario
+            @param ivNombreCliente IN CLIENTE.NOMBRE%TYPE
+                Nombre comleto del funcionario
+            @param ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE
+                Direcccion de ubicacion del funcionario
+            @param ivDireccionCliente IN CLIENTE.DIRECCION%TYPE
+                Direcccion de ubicacion del funcionario
+            @param ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
+                Numero de telefono de contacto del funcionario
+            @Return Mensaje de confirmacion si se registra
+        */
 	FUNCTION fRegistrarFuncionario(
         ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivNombreFuncionario IN FUNCIONARIO.NOMBRE%TYPE,
@@ -18,6 +48,16 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel3 AS
     ) 
         RETURN VARCHAR2;
     
+    /**
+        
+        @param ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE
+            Codigo definido para el tipo de producto
+       @param ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE
+            nombre para el tipo de producto
+       @param ivDescripcionTipoProducto IN TIPO_PRODUCTO.DESCRIPCION%TYPE
+            caracteristicas del tipo de producto
+        @return mensaje d econfirmacion si se confirma
+        */
     FUNCTION fRegistrarTipoProducto(
         ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
         ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE,
