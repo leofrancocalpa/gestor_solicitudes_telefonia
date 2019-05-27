@@ -1,20 +1,41 @@
 CREATE OR REPLACE PACKAGE pkTipoSolicitudNivel1 IS
+    /**
+        
+        @param ivcodigo        tipo_solicitud.codigo%TYPE
+        @param ivnombre        tipo_solicitud.nombre%TYPE
+        @param ivdescripcion   tipo_solicitud.descripcion%TYPE
+        */
     PROCEDURE pinsertar (
         ivcodigo        tipo_solicitud.codigo%TYPE,
         ivnombre        tipo_solicitud.nombre%TYPE,
         ivdescripcion   tipo_solicitud.descripcion%TYPE
     );
 
+    /**
+        proceso que elimina un registro de la tabla tipo solicitud
+        @param ivcodigo tipo_solicitud.codigo%TYPE
+        */
     PROCEDURE pEliminarTipoSolicitud (
         ivcodigo tipo_solicitud.codigo%TYPE
     );
 
+    /**
+        proceso que modifica el registro de una solicitud dada con los parametros de entrada
+        @param ivcodigo        tipo_solicitud.codigo%TYPE
+        @param ivnombre        tipo_solicitud.nombre%TYPE
+        @param ivdescripcion   tipo_solicitud.descripcion%TYPE
+        */
     PROCEDURE pModificarTipoSolicitud (
         ivcodigo        tipo_solicitud.codigo%TYPE,
         ivnombre        tipo_solicitud.nombre%TYPE,
         ivdescripcion   tipo_solicitud.descripcion%TYPE
     );
 
+    /**
+        funcion que retorna un registro de la tabla tipo solicitud
+        @param ivcodigo tipo_solicitud.codigo%TYPE
+        @return 
+        */
     FUNCTION fConsultar (
         ivcodigo tipo_solicitud.codigo%TYPE
     ) RETURN tipo_solicitud%rowtype;

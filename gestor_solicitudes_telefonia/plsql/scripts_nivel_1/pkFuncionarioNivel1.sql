@@ -1,4 +1,13 @@
 CREATE OR REPLACE PACKAGE pkFuncionarioNivel1 AS
+
+    /**
+        Proceso que inserta un registro en la tabla funcionario nivel
+        @param ivcedula             funcionario.cedula%TYPE
+        @param ivnombre             funcionario.nombre%TYPE
+        @param ivfecha_nacimiento   funcionario.fecha_nacimiento%TYPE
+        @param ivdireccion          funcionario.direccion%TYPE
+        @param ivtelefono           funcionario.telefono%TYPE
+        */
     PROCEDURE pinsertar (
         ivcedula             funcionario.cedula%TYPE,
         ivnombre             funcionario.nombre%TYPE,
@@ -7,10 +16,22 @@ CREATE OR REPLACE PACKAGE pkFuncionarioNivel1 AS
         ivtelefono           funcionario.telefono%TYPE
     );
 
+    /**
+        proceso que elimina un registro de la tabla funcionario. Busca el registro con el parametro dado
+        @param ivcedula funcionario.cedula%TYPE
+        */
     PROCEDURE peliminar (
         ivcedula funcionario.cedula%TYPE
     );
 
+    /**
+        modifica un ragistro de funcionario con los parametros de entrada. EL registro se busca con la cedula del funcionario
+        @param ivcedula             funcionario.cedula%TYPE
+        @param ivnombre             funcionario.nombre%TYPE
+        @param ivfecha_nacimiento   funcionario.fecha_nacimiento%TYPE
+        @param ivdireccion          funcionario.direccion%TYPE
+        @param ivtelefono           funcionario.telefono%TYPE
+        */
     PROCEDURE pmodificar (
         ivcedula             funcionario.cedula%TYPE,
         ivnombre             funcionario.nombre%TYPE,
@@ -19,6 +40,11 @@ CREATE OR REPLACE PACKAGE pkFuncionarioNivel1 AS
         ivtelefono           funcionario.telefono%TYPE
     );
 
+    /**
+        funcion que consulta un registro de la tabla funcionario
+        @param ivcedula funcionario.cedula%TYPE
+        @return 
+        */
     FUNCTION fconsultar (
         ivcedula funcionario.cedula%TYPE
     ) RETURN funcionario%rowtype;
@@ -47,9 +73,9 @@ CREATE OR REPLACE PACKAGE BODY pkFuncionarioNivel1 AS
 
     EXCEPTION
         WHEN dup_val_on_index THEN
-            raise_application_error(-20001, 'Error, este registro ya existe.');
+            raise_application_error(-1, 'Error, este registro ya existe.');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error desconocido.'
+            raise_application_error(-1, 'Error '
                                             || sqlerrm
                                             || sqlcode);
     END pinsertar;
@@ -66,9 +92,9 @@ CREATE OR REPLACE PACKAGE BODY pkFuncionarioNivel1 AS
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'Error, no existe un funcionario con ese n�mero de cedula.');
+            raise_application_error(-1, 'Error, no existe un funcionario con ese numero de cedula.');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error desconocido.'
+            raise_application_error(-1, 'Error '
                                             || sqlerrm
                                             || sqlcode);
     END peliminar;
@@ -95,9 +121,9 @@ CREATE OR REPLACE PACKAGE BODY pkFuncionarioNivel1 AS
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'Error,  no existe un funcionario con ese n�mero de cedula.');
+            raise_application_error(-1, 'Error,  no existe un funcionario con ese numero de cedula.');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error desconocido.'
+            raise_application_error(-1, 'Error '
                                             || sqlerrm
                                             || sqlcode);
     END pmodificar;
@@ -120,9 +146,9 @@ CREATE OR REPLACE PACKAGE BODY pkFuncionarioNivel1 AS
         RETURN rowfuncionario;
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'Error, no existe un funcionario con ese n�mero de cedula.');
+            raise_application_error(-1, 'Error, no existe un funcionario con ese numero de cedula.');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error desconocido.'
+            raise_application_error(-1, 'Error '
                                             || sqlerrm
                                             || sqlcode);
     END fconsultar;

@@ -1,20 +1,42 @@
 CREATE OR REPLACE PACKAGE pkTipoProductoNivel1 AS
+
+    /**
+        proceso que inserta un registro en la tabla tipo producto
+        @param ivcodigo        tipo_producto.codigo%TYPE
+        @param ivnombre        tipo_producto.nombre%TYPE
+        @param ivdescripcion   tipo_producto.descripcion%TYPE
+        */
     PROCEDURE pinsertar (
         ivcodigo        tipo_producto.codigo%TYPE,
         ivnombre        tipo_producto.nombre%TYPE,
         ivdescripcion   tipo_producto.descripcion%TYPE
     );
 
+    /**
+        procesoque elimina un registro de la tabla tipo producto
+        @param ivcodigo tipo_producto.codigo%TYPE
+        */
     PROCEDURE peliminar (
         ivcodigo tipo_producto.codigo%TYPE
     );
 
+    /**
+        proceso que modifica un registro de la tabla tipo producto
+        @param ivcodigo        tipo_producto.codigo%TYPE
+        @param ivnombre        tipo_producto.nombre%TYPE
+        @param ivdescripcion   tipo_producto.descripcion%TYPE
+        */
     PROCEDURE pmodificar (
         ivcodigo        tipo_producto.codigo%TYPE,
         ivnombre        tipo_producto.nombre%TYPE,
         ivdescripcion   tipo_producto.descripcion%TYPE
     );
 
+    /**
+        funcion que retorna un registro de la tabla tipo producto 
+        @param ivcodigo tipo_producto.codigo%TYPE
+        @return 
+        */
     FUNCTION fconsultar (
         ivcodigo tipo_producto.codigo%TYPE
     ) RETURN tipo_producto%rowtype;
@@ -38,9 +60,9 @@ CREATE OR REPLACE PACKAGE BODY pkTipoProductoNivel1 AS
 
     EXCEPTION
         WHEN dup_val_on_index THEN
-            raise_application_error(-20001, 'El id esta duplicado');
+            raise_application_error(-1, 'El codigo esta duplicado');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error'
+            raise_application_error(-1, 'Error'
                                             || sqlerrm
                                             || sqlcode);
     END pinsertar;
@@ -55,9 +77,9 @@ CREATE OR REPLACE PACKAGE BODY pkTipoProductoNivel1 AS
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'El ID que se quiere eliminar no existe');
+            raise_application_error(-1, 'El codigo que se quiere eliminar no existe');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error'
+            raise_application_error(-1, 'Error'
                                             || sqlerrm
                                             || sqlcode);
     END peliminar;
@@ -77,9 +99,9 @@ CREATE OR REPLACE PACKAGE BODY pkTipoProductoNivel1 AS
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'El ID que se quiere modificar no existe');
+            raise_application_error(-1, 'El codigo que se quiere modificar no existe');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error'
+            raise_application_error(-1, 'Error'
                                             || sqlerrm
                                             || sqlcode);
     END pmodificar;
@@ -100,9 +122,9 @@ CREATE OR REPLACE PACKAGE BODY pkTipoProductoNivel1 AS
         RETURN rowtp;
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20001, 'El ID que se quiere consultar no existe');
+            raise_application_error(-1, 'El codigo que se quiere consultar no existe');
         WHEN OTHERS THEN
-            raise_application_error(-20001, 'Error'
+            raise_application_error(-1, 'Error'
                                             || sqlerrm
                                             || sqlcode);
     END fconsultar;

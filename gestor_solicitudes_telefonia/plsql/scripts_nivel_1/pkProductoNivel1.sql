@@ -1,18 +1,40 @@
 CREATE OR REPLACE PACKAGE pkProductoNivel1 AS
+
+    /**
+        proceso que insertaun registro en la tabla producto
+        @param ivid                     producto.id%TYPE
+        @param ivnombre                 producto.nombre%TYPE
+        @param ivtipo_producto_codigo   producto.tipo_producto_codigo%TYPE
+        */
     PROCEDURE pinsertar (
         ivid                     producto.id%TYPE,
         ivnombre                 producto.nombre%TYPE,
         ivtipo_producto_codigo   producto.tipo_producto_codigo%TYPE
     );
 
+    /**
+        proceso que elimina un registro de la tabla producto
+        @param ivid producto.id%TYPE
+        */
     PROCEDURE peliminar (
         ivid producto.id%TYPE
     );
 
+    /**
+        funcion que permite consultar un registro de la tabla producto
+        @param ivid producto.id%TYPE
+        @return 
+        */
     FUNCTION fconsultar (
         ivid producto.id%TYPE
     ) RETURN producto%rowtype;
 
+    /**
+        proceso que modifica un registro de la tabla producto
+        @param ivid                     producto.id%TYPE
+        @param ivnombre                 producto.nombre%TYPE
+        @param ivtipo_producto_codigo   producto.tipo_producto_codigo%TYPE
+        */
     PROCEDURE pmodificar (
         ivid                     producto.id%TYPE,
         ivnombre                 producto.nombre%TYPE,
