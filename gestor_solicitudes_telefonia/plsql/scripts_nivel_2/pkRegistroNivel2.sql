@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
-        ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
+        --ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivIdProducto IN PRODUCTO.ID%TYPE,
         ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
         ivIdAnomalia IN ANOMALIA.ID%TYPE
@@ -94,7 +94,7 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel2 AS
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
-        ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
+       -- ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivIdProducto IN PRODUCTO.ID%TYPE,
         ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
         ivIdAnomalia IN ANOMALIA.ID%TYPE
@@ -105,7 +105,7 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel2 AS
     	vEstado SOLICITUD.ESTADO%TYPE;
         vComentarioFuncionario SOLICITUD.COMENTARIO_FUNCIONARIO%TYPE;
         vNumeroSolicitud SOLICITUD.NUMERO_SOLICITUD%TYPE;
-        
+        vCedulaFuncionario FUNCIONARIO.CEDULA%TYPE;
 	
     BEGIN
 	    vNumeroSolicitud := pkSolicitudNivel1.fNextNumeroSolicitud;
@@ -114,7 +114,8 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel2 AS
     	vFechaAtencion := NULL;
     	vEstado := pkSolicitudNivel1.ESTADO_PENDIENTE;
     	vComentarioFuncionario:=NULL;
-   		
+   		vCedulaFuncionario:='xxxx';
+        
     	pkSolicitudNivel1.pinsertarsolicitud(
     		vNumeroSolicitud,
     		ivObservacion,
@@ -127,7 +128,7 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel2 AS
     		ivCedulaCliente,
     		ivIdAnomalia,
     		ivCodigoTipoSolicitud,
-    		ivCedulaFuncionario,
+    		vCedulaFuncionario,
     		ivIdProducto
     		);
     	EXCEPTION 
