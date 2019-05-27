@@ -85,7 +85,7 @@ CREATE OR REPLACE PACKAGE BODY pkParametrosNivel1 AS
                                             || sqlcode);
     END pmodificar;
 
-    FUNCTION fconsultar_tiempo_max_pendiente RETURN parametros.tiempo_max_pendiente%TYPE IS
+    FUNCTION fconsultartiempomaxpendiente RETURN parametros.tiempo_max_pendiente%TYPE IS
         ovtiempo_max parametros.tiempo_max_pendiente%TYPE;
     BEGIN
         SELECT
@@ -104,9 +104,9 @@ CREATE OR REPLACE PACKAGE BODY pkParametrosNivel1 AS
             raise_application_error(-20001, 'Error'
                                             || sqlerrm
                                             || sqlcode);
-    END fconsultar_tiempo_max_pendiente;
+    END fconsultartiempomaxpendiente;
 
-    FUNCTION fconsultar_num_max_solicitudes RETURN parametros.num_max_solicitudes%TYPE IS
+    FUNCTION fconsultarnummaxsolicitudes RETURN parametros.num_max_solicitudes%TYPE IS
         ovnum_max_solicitudes parametros.num_max_solicitudes%TYPE;
     BEGIN
         SELECT
@@ -125,6 +125,6 @@ CREATE OR REPLACE PACKAGE BODY pkParametrosNivel1 AS
             raise_application_error(-20001, 'Error'
                                             || sqlerrm
                                             || sqlcode);
-    END fconsultar_num_max_solicitudes;
+    END fconsultarnummaxsolicitudes;
 
 END pkParametrosNivel1;

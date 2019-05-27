@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE pkSolicitudNivel1 AS
+﻿CREATE OR REPLACE PACKAGE pkSolicitudNivel1 AS
 --[declaración de objetos públicos]
 
 	ESTADO_PENDIENTE CONSTANT SOLICITUD.ESTADO%TYPE :='PENIENTE';
@@ -9,6 +9,7 @@ CREATE OR REPLACE PACKAGE pkSolicitudNivel1 AS
     PROCEDURE pinsertarsolicitud (
         ivnumero_solicitud         solicitud.numero_solicitud%TYPE,
         ivobservacion              solicitud.observacion%TYPE,
+        ivfecha_creacion           solicitud.fecha_creacion%TYPE,
         ivfecha_asignacion         solicitud.fecha_asignacion%TYPE,
         ivfecha_atencion           solicitud.fecha_atencion%TYPE,
         ivcausa_cancelacion        solicitud.causa_cancelacion%TYPE,
@@ -81,6 +82,7 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
     PROCEDURE pinsertarsolicitud (
         ivnumero_solicitud         solicitud.numero_solicitud%TYPE,
         ivobservacion              solicitud.observacion%TYPE,
+        ivfecha_creacion           solicitud.fecha_creacion%TYPE,
         ivfecha_asignacion         solicitud.fecha_asignacion%TYPE,
         ivfecha_atencion           solicitud.fecha_atencion%TYPE,
         ivcausa_cancelacion        solicitud.causa_cancelacion%TYPE,
@@ -96,6 +98,7 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
         INSERT INTO solicitud VALUES (
             ivnumero_solicitud,
             ivobservacion,
+            ivfecha_creacion,
             ivfecha_asignacion,
             ivfecha_atencion,
             ivcausa_cancelacion,
@@ -280,7 +283,7 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
         tlimite parametros.tiempo_max_pendiente%TYPE;
     BEGIN
         ovnumero_solicitud := -1;
-        tlimite := pkparametrosnivel1.fconsultar_tiempo_max_pendiente();
+        tlimite := pkparametrosnivel1.fconsultartiempomaxpendiente();
         SELECT
             s.numero_solicitud
         INTO ovnumero_solicitud
@@ -300,21 +303,6 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
                                             || sqlcode);
     END fconsultarsolicitudesvencidas;
 
-    FUNCTION fnumerosolicitudesfuncionario (
-        ivfuncionario_cedula solicitud.funcionario_cedula%TYPE
-    ) RETURN NUMBER IS
-        ovcantidadsolicitudes NUMBER;
-    BEGIN
-        SELECT
-            COUNT(*)
-        INTO ovcantidadsolicitudes
-        FROM
-            solicitud s
-        WHERE
-            s.funcionario_cedula = ivfuncionario_cedula;
-
-    END fnumerosolicitudesfuncionario;
-
     FUNCTION fNextNumeroSolicitud RETURN NUMBER IS
         ovNextNumeroSolicitud NUMBER;
     BEGIN
@@ -323,6 +311,6 @@ CREATE OR REPLACE PACKAGE BODY pkSolicitudNivel1 AS
         INTO ovNextNumeroSolicitud
         FROM
             DUAL;
-    END fnumerosolicitudesfuncionario;
+    END fNextNumeroSolicitud;
 
 END pkSolicitudNivel1;

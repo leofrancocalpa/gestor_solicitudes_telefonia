@@ -1,4 +1,4 @@
-CREATE SECUENCE secuence_numero_solicitud
+CREATE SEQUENCE secuence_numero_solicitud
   START WITH     1
   INCREMENT BY   1
   MAXVALUE 99999

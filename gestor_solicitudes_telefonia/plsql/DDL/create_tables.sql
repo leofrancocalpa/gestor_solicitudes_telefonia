@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 18.4.0.339.1536
---   en:        2019-05-26 01:45:04 COT
+--   en:        2019-05-26 19:30:47 COT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -32,7 +32,7 @@ LOGGING;
 ALTER TABLE anomalia ADD CONSTRAINT anomalia_pk PRIMARY KEY ( id );
 
 CREATE TABLE cliente (
-    cedula             NUMBER(11) NOT NULL,
+    cedula             NVARCHAR2(11) NOT NULL,
     nombre             NVARCHAR2(30) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
     direccion          NVARCHAR2(20) NOT NULL,
@@ -45,13 +45,13 @@ ALTER TABLE cliente ADD CONSTRAINT cliente_pk PRIMARY KEY ( cedula );
 CREATE TABLE contrato (
     fecha_inicio     DATE NOT NULL,
     fecha_fin        DATE,
-    cliente_cedula   NUMBER(11) NOT NULL,
+    cliente_cedula   NVARCHAR2(11) NOT NULL,
     producto_id      NVARCHAR2(10) NOT NULL
 )
 LOGGING;
 
 CREATE TABLE funcionario (
-    cedula             NUMBER(11) NOT NULL,
+    cedula             NVARCHAR2(11) NOT NULL,
     nombre             NVARCHAR2(30) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
     direccion          NVARCHAR2(20) NOT NULL,
@@ -82,15 +82,16 @@ ALTER TABLE producto ADD CONSTRAINT producto_pk PRIMARY KEY ( id );
 CREATE TABLE solicitud (
     numero_solicitud         NUMBER(10) NOT NULL,
     observacion              NVARCHAR2(200),
-    fecha_asignacion         DATE NOT NULL,
+    fecha_creacion           DATE NOT NULL,
+    fecha_asignacion         DATE,
     fecha_atencion           DATE,
     causa_cancelacion        NVARCHAR2(200),
     comentario_funcionario   NVARCHAR2(200),
     estado                   NVARCHAR2(30) NOT NULL,
-    cliente_cedula           NUMBER(11) NOT NULL,
+    cliente_cedula           NVARCHAR2(11) NOT NULL,
     anomalia_id              NVARCHAR2(10) NOT NULL,
     tipo_solicitud_codigo    NVARCHAR2(15) NOT NULL,
-    funcionario_cedula       NUMBER(11) NOT NULL,
+    funcionario_cedula       NVARCHAR2(11) NOT NULL,
     producto_id              NVARCHAR2(10) NOT NULL
 )
 LOGGING;
