@@ -1,7 +1,7 @@
-CREATE TRIGGER triggerAsignacionAutomatica
+CREATE OR REPLACE TRIGGER triggerAsignacionAutomatica
     AFTER
         INSERT ON SOLICITUD
             FOR EACH ROW
     BEGIN
-        pkAsignacionNivel3.fAsignacionAutomatica(:NEW.id);
+        pkAsignacionNivel2.pAsignacionAutomatica(:NEW.NUMERO_SOLICITUD);
 END triggerAsignacionAutomatica;       
