@@ -17,7 +17,15 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
             Numero de telefono de contacto del cliente
         */
         
-        /**
+     PROCEDURE pRegistrarCliente(
+        ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
+        ivNombreCliente IN CLIENTE.NOMBRE%TYPE,
+        ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE,
+        ivDireccionCliente IN CLIENTE.DIRECCION%TYPE,
+        ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
+    );
+    
+     /**
             Procedimiento que permite registrar un Funcionario no existente en la bd
             
             @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
@@ -31,14 +39,6 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
             @param ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
                 Numero de telefono de contacto del funcionario
             */
-     PROCEDURE pRegistrarCliente(
-        ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
-        ivNombreCliente IN CLIENTE.NOMBRE%TYPE,
-        ivFechaNacimientoCliente IN CLIENTE.FECHA_NACIMIENTO%TYPE,
-        ivDireccionCliente IN CLIENTE.DIRECCION%TYPE,
-        ivTelefonoCliente IN CLIENTE.TELEFONo%TYPE
-    );
-    
     PROCEDURE pRegistrarFuncionario(
         ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivNombreFuncionario IN FUNCIONARIO.NOMBRE%TYPE,
@@ -47,6 +47,15 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
         ivTelefonoFuncionario IN FUNCIONARIO.TELEFONo%TYPE
     );
    
+   /**
+       Procedimiento que permite registrar un nuevo tipo de producto a la bd
+       @param ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE
+            Codigo definido para el tipo de producto
+       @param ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE
+            nombre para el tipo de producto
+       @param ivDescripcionTipoProducto IN TIPO_PRODUCTO.DESCRIPCION%TYPE
+            caracteristicas del tipo de producto
+       */
    PROCEDURE pRegistrarTipoProducto(
         ivCodigoTipoProducto IN TIPO_PRODUCTO.CODIGO%TYPE,
         ivNombreTipoProducto IN TIPO_PRODUCTO.NOMBRE%TYPE,
@@ -64,6 +73,24 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel2 AS
     --    ivNombreAnomalia IN  ANOMALIA.NOMBRE%TYPE
     --);
     
+    /**
+        Procediemiento para radicar una solicitud
+        
+        @param ivObservacion IN SOLICITUD.OBSERVACION%TYPE
+            Observaciones del cliente sobre la solicitud
+        @param ivCedulaCliente IN CLIENTE.CEDULA%TYPE
+            cedula documento de identificacion del Cliente
+        @param ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE
+            codigo correspondiente al tipo de solicitud que desea radicar
+        @param --ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE
+            Obsoleto
+        @param ivIdProducto IN PRODUCTO.ID%TYPE
+            Id del producto ligado a la solicitud de ser nuevo sera 'xxxx' por defecto mientras se crea
+        @param ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE
+            texto con la causa de cancelacion si la solicitud es de tipo cancelacion, sino 'xxxx'
+        @param ivIdAnomalia IN ANOMALIA.ID%TYPE
+            Si la solicitud es sobre un dano : identificacion del tipo de anomalia
+        */
     PROCEDURE pRegistrarSolicitud(
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
