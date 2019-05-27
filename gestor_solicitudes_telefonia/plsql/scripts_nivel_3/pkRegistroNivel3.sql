@@ -29,7 +29,7 @@ CREATE OR REPLACE PACKAGE pkRegistroNivel3 AS
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
-        ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
+       -- ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivIdProducto IN PRODUCTO.ID%TYPE,
         ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
         ivIdAnomalia IN ANOMALIA.ID%TYPE
@@ -107,7 +107,7 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel3 AS
         ivObservacion IN SOLICITUD.OBSERVACION%TYPE,
         ivCedulaCliente IN CLIENTE.CEDULA%TYPE,
         ivCodigoTipoSolicitud IN TIPO_SOLICITUD.CODIGO%TYPE,
-        ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
+        --ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE,
         ivIdProducto IN PRODUCTO.ID%TYPE,
         ivCausaCancelacionSolicitud IN SOLICITUD.CAUSA_CANCELACION%TYPE,
         ivIdAnomalia IN ANOMALIA.ID%TYPE
@@ -118,7 +118,7 @@ CREATE OR REPLACE PACKAGE BODY pkRegistroNivel3 AS
                     ivObservacion,
                     ivCedulaCliente,
                     ivCodigoTipoSolicitud,
-                    ivCedulaFuncionario,
+                   -- ivCedulaFuncionario,
                     ivIdProducto,
                     ivCausaCancelacionSolicitud,
                     ivIdAnomalia
