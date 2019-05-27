@@ -20,7 +20,7 @@ private static  Connection connection;
 		String user="P09551_1_16";
 		String password="P09551_1_16_20191";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection contection=DriverManager.getConnection("jdbc:oracle:thin:@"+ip+":"+puerto+":"+insta,user,password);
+		Connection contection=DriverManager.getConnection("jdbc:oracle:thin:@"+ip+":"+puerto+"/"+insta,user,password);
 		return contection;
 	}
 

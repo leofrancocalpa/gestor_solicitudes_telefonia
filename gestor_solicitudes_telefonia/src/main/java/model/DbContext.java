@@ -1,13 +1,13 @@
 	package model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.stream.Stream;
 
 public class DbContext {
 	
@@ -63,6 +63,73 @@ public class DbContext {
 		return dbContext;
 	}
 	
+	public void registrarCliente(String cedula, String nombre, String fecha_nacimiento, String direccion, String telefono) {
+		String function = "{? = call pkRegistroNivel3.fRegistrarCliente(?,?,?,?,?)}";
+		try {
+			CallableStatement cs = connection.prepareCall(function);
+			cs.registerOutParameter(1, Types.VARCHAR);
+			cs.setString(2, cedula);
+			cs.setString(3, nombre);
+			cs.setDate(4, Date.valueOf(fecha_nacimiento));
+			cs.setString(5, direccion);
+			cs.setString(6, telefono);
+			cs.execute();
+		}
+		catch(SQLException e) {
+			System.out.println("Error al registrar usuario: "+ e.getMessage());
+		}
+	}
+	
+	public void registrarFuncionario(String cedula, String nombre, String fecha_nacimiento, String direccion, String telefono) {
+		String function = "{? = call pkRegistroNivel3.fRegistrarFuncionario(?,?,?,?,?)}";
+		try {
+			CallableStatement cs = connection.prepareCall(function);
+			cs.registerOutParameter(1, Types.VARCHAR);
+			cs.setString(2, cedula);
+			cs.setString(3, nombre);
+			cs.setDate(4, Date.valueOf(fecha_nacimiento));
+			cs.setString(5, direccion);
+			cs.setString(6, telefono);
+			cs.execute();
+		}
+		catch(SQLException e) {
+			System.out.println("Error al registrar usuario: "+ e.getMessage());
+		}
+	}
+	
+	public void registrarTipoProducto(String codigo, String nombre,String descripcion) {
+		String function = "{? = call pkRegistroNivel3.fRegistrarTipoProducto(?,?,?)}";
+		try {
+			CallableStatement cs = connection.prepareCall(function);
+			cs.registerOutParameter(1, Types.VARCHAR);
+			cs.setString(2, codigo);
+			cs.setString(3, nombre);
+			cs.setString(4, descripcion);
+			cs.execute();
+		}
+		catch(SQLException e) {
+			System.out.println("Error al registrar usuario: "+ e.getMessage());
+		}
+	}
+	
+	public void registrarSolicitud(String observacion, String cedula_cliente, String codigo_tipo_solicitud, String cedula_funcionario, String idProducto, String causa_cancelacion, String idAnomalia) {
+		String function = "{? = call pkRegistroNivel3.fRegistrarSolicitud(?,?,?,?,?,?,?)}";
+		try {
+			CallableStatement cs = connection.prepareCall(function);
+			cs.registerOutParameter(1, Types.VARCHAR);
+			cs.setString(2, observacion);
+			cs.setString(3, cedula_cliente);
+			cs.setString(4, codigo_tipo_solicitud);
+			cs.setString(5, cedula_funcionario);
+			cs.setString(6, idProducto);
+			cs.setString(7, causa_cancelacion);
+			cs.setString(8, idAnomalia);
+			cs.execute();
+		}
+		catch(SQLException e) {
+			System.out.println("Error al registrar usuario: "+ e.getMessage());
+		}
+	}
 	
 	// -- load objects from database
 	private void loadClientes() throws SQLException{

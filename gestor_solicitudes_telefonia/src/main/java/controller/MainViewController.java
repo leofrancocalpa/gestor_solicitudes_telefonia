@@ -11,8 +11,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import view.MainView;
 
 public class MainViewController implements Initializable{
+	
+	private MainView mainView;
 
     @FXML
     private AnchorPane pane_principal;
@@ -49,7 +52,7 @@ public class MainViewController implements Initializable{
 
     @FXML
     void event_btn_registrar(ActionEvent event) {
-
+    	mainView.showRegistrarUserView();
     }
 
     @FXML
@@ -69,6 +72,10 @@ public class MainViewController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setMain(MainView mainView) {
+		this.mainView = mainView;
 	}
 
 }
