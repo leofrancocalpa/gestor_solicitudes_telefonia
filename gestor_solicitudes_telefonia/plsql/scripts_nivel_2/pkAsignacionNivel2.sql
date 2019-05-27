@@ -10,8 +10,8 @@ CREATE OR REPLACE PACKAGE pkAsignacionNivel2 AS
 	);
 	
 END pkAsignacionNivel2;
-
-CREATE OR REPLACE PACKAGE pkAsignacionNivel2 AS
+/
+CREATE OR REPLACE PACKAGE BODY pkAsignacionNivel2 AS
 
 	PROCEDURE pAsignacionAutomatica(
 		ivNumeroSolicitud IN SOLICITUD.NUMERO_SOLICITUD%TYPE
@@ -41,7 +41,7 @@ CREATE OR REPLACE PACKAGE pkAsignacionNivel2 AS
 				ROWNUM=vIndice;
 			
 			vCantidadSolicitudesFuncionario:= pkSolicitudNivel1.fnumerosolicitudesfuncionario(vCedulaFuncionarioRef);
-			vParamatroMaxSolicitudes:=pkParametrosNivel1.fconsultarnummaxsolicitudes;
+			vParametroMaxSolicitudes:=pkParametrosNivel1.fconsultarnummaxsolicitudes;
 			IF vCantidadSolicitudesFuncionario < vParametroMaxSolicitudes THEN
 				pkSolicitudNivel1.pmodificarfuncionario(ivNumeroSolicitud,vCedulaFuncionarioRef);
 				vTotalFuncionarios:=0;
@@ -53,7 +53,7 @@ CREATE OR REPLACE PACKAGE pkAsignacionNivel2 AS
 	
 	END pAsignacionAutomatica;	
 	
-	PROCEDURE pAsigancionIndividual(
+	PROCEDURE pAsignacionIndividual(
 		ivNumeroSolicitud IN SOLICITUD.NUMERO_SOLICITUD%TYPE,
 		ivCedulaFuncionario IN FUNCIONARIO.CEDULA%TYPE
 	) IS
@@ -61,7 +61,7 @@ CREATE OR REPLACE PACKAGE pkAsignacionNivel2 AS
 			pkSolicitudNivel1.pmodificarfuncionario(ivNumeroSolicitud,ivCedulaFuncionario);
 		EXCEPTION
 			WHEN OTHERS THEN
-				RAISE_APPLICATION_ERROR(-1,'Error al asignar la solicitud 'ivNumeroSolicitud ' al Funcionario con cedula 'ivCedulaFuncionario);
+				RAISE_APPLICATION_ERROR(-1,'Error al asignar la solicitud '+ ivNumeroSolicitud +' al Funcionario con cedula '+ivCedulaFuncionario);
 				
-	END pAsignacionAutomatica;
+	END pAsignacionIndividual;
 END pkAsignacionNivel2;
